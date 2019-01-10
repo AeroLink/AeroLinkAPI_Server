@@ -1,0 +1,27 @@
+{
+  "name": "aerolink-api-server",
+  "version": "1.0.0",
+  "description": "api server that serves as a middleware between the Logic Server and Client Side ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "author": "Ariel Lecias",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
+    "colors": "^1.3.3",
+    "cors": "^2.8.4",
+    "express": "^4.15.2",
+    "jsonwebtoken": "*",
+    "multer": "^1.3.0",
+    "nodemon": "^1.18.3",
+    "passport": "*",
+    "passport-jwt": "*",
+    "socket.io": "^2.1.1",
+    "mongoose": "^4.13.9",
+    "mongoose-sequence": "^4.0.1"
+  }
+}
