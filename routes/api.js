@@ -202,7 +202,8 @@ router.post('/get', passport.authenticate('jwt', {
         query: req.body.hasOwnProperty('A1009') ? req.body.A1009 : "",
         action: 'GET',
         where: req.body.hasOwnProperty('B1009'),
-        values: req.body.hasOwnProperty('B1009') ? req.body.B1009 : ""
+        values: req.body.hasOwnProperty('B1009') ? req.body.B1009 : "",
+        refresh: req.body.hasOwnProperty('refresher') ? req.body.refresher : "false",
     }, (err, result_set) => {
         if (err) {
             wr.webFailed(err);

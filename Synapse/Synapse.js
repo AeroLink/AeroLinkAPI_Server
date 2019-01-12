@@ -40,8 +40,8 @@ module.exports.execute = function (opts, callback) {
         }
 
         if (opts['action'] == 'GET') {
-            wr.webNormal("Executing Query : " + opts['query'])
-            get(opts['query'], opts['where'] ? opts['values'] : "", (data) => {
+            if(!opts['refresh']) { wr.webNormal("Executing Query : " + opts['query']) }
+            get(opts['query'], opts['where'] ? opts['values'] : "", opts['refresh'], (data) => {
                 result = data;
                 callback(error, result);
             });
@@ -75,10 +75,10 @@ module.exports.execute = function (opts, callback) {
 
 }
 
-let get = function (query, values = "", cb) {
+let get = function (query, values = "", refresh, cb) {
     var result;
 
-    dr.apiNormal(" Connecting to Backend Server ... ");
+    if(!refresh) { dr.apiNormal(" Connecting to Backend Server ... "); }
     var requestAerolinkDB = http.request(options, function (res) {
         var chunks = [];
 
@@ -90,18 +90,18 @@ let get = function (query, values = "", cb) {
             var body = Buffer.concat(chunks);
             result = body.toString();
             cb(result);
-            wr.webSuccess("Execution Complete : " + (JSON.parse(result).result).length + " " + ((JSON.parse(result).result).length <= 1 ? "result" : "results") + " found.");
+            if(!refresh) { wr.webSuccess("Execution Complete : " + (JSON.parse(result).result).length + " " + ((JSON.parse(result).result).length <= 1 ? "result" : "results") + " found."); }
         });
     });
 
     if (values != "") {
-        dr.apiNormal("Sending Request with values");
+        if(!refresh) { dr.apiNormal("Sending Request with values"); }
         requestAerolinkDB.write(qs.stringify({
             "0x1009A": query,
             "0x1009B": values,
         }));
     } else {
-        dr.apiNormal("Sending Request without any values");
+        if(!refresh) { dr.apiNormal("Sending Request without any values"); }
         requestAerolinkDB.write(qs.stringify({
             "0x1009A": query,
         }));

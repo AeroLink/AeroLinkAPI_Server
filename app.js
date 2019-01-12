@@ -9,7 +9,7 @@ const server_response = require('./response/serverResponse');
 var app = express();
 
 //PORT
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8423;
 
 // Cross Origin Resource Sharing Middleware
 app.use(cors());
