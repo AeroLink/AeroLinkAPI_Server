@@ -16,3 +16,16 @@ module.exports.closeServer = function() {
 module.exports.errorServer = function(err) {
     console.log("[" + "SERVER".red + "] -> " + ('Error was been caught :' + err ).red );
 }
+
+
+module.exports.socketSuccess = function(message) {
+    console.log("[" + "SOKCET".green + "] -> " + message.green);
+}
+
+module.exports.socketNormal = function(message) {
+    console.log("[" + "SOKCET".green + "] -> " + message);
+}
+
+module.exports.socketError = function(err) {
+    console.log("[" + "SOCKET".red + "] -> " + ('Error was been caught :' + err ).red );
+}

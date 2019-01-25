@@ -44,33 +44,7 @@ app.get('*', (req, res) => {
 
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-
-io.on('connection', function (socket) {
-
-  console.log('a user connected');
-
-  socket.on('disconnect', function () {
-    console.log('user disconnected');
-  });
-
-  socket.on('joinRoom', function (room) {
-    console.log("Joining Room", room);
-    socket.join(room);
-  });
-
-  socket.on('comment', function (d) {
-    var data = d.data;
-    console.log(data);
-    socket.broadcast.to(data.room).emit('rtComment', data);
-  });
-
-  socket.on('foo', function (d) {
-    var data = d.data;
-    console.log(data);
-  });
-
-
-});
+require('./sockets/sockets')(io);
 
 http.listen(port, function () {
   server_response.startServer(port);
